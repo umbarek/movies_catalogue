@@ -22,3 +22,27 @@ def get_movies_list(list_type):
     response = requests.get(endpoint+f"{list_type}", headers=headers)
     response.raise_for_status()
     return response.json()
+
+def get_single_movie(movie_id):
+    endpoint = f"https://api.themoviedb.org/3/movie/{movie_id}"
+    headers = {
+        "Authorization": f"Bearer {api_token}"
+    }
+    response = requests.get(endpoint, headers=headers)
+    return response.json()
+
+def get_single_movie_cast(movie_id):
+    endpoint = f"https://api.themoviedb.org/3/movie/{movie_id}/credits"
+    headers = {
+        "Authorization": f"Bearer {api_token}"
+    }
+    response = requests.get(endpoint, headers=headers)
+    return response.json()["cast"]
+
+def get_movie_images(movie_id):
+    endpoint = f"https://api.themoviedb.org/3/movie/{movie_id}/images"
+    headers = {
+        "Authorization": f"Bearer {api_token}"
+    }
+    response = requests.get(endpoint, headers=headers)
+    return response.json()
