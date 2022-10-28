@@ -3,17 +3,20 @@
 {% block content %}
 
 <div class="row">
-    <div class="col-lg-12 mb-4">
+    <div class="col-lg-12 text-center">
         <h1 class="mt-5">BIBLIOTEKA FILMÓW</h1>
         <p class="lead">baza najlepszych tytułów w sieci!</p>
     </div>
 
     <div class="col-lg-12 mb-4">
-            <a href='{{ url_for('homepage', list_type="now_playing") }}' class="btn btn-outline-info">Aktualnie grane</a>
-            <a href='{{ url_for('homepage', list_type="popular") }}' class="btn btn-outline-info">Najpopularniejsze</a>
-            <a href='{{ url_for('homepage', list_type="top_rated") }}' class="btn btn-outline-info">TOP of the TOP</a>
-            <a href='{{ url_for('homepage', list_type="upcoming") }}' class="btn btn-outline-info">Premiera wkrótce</a>
-        </div>
+    {% for lista in new_list %}
+         {% if current_list==lista %}
+            <a href="{{ url_for('homepage', list_type=lista ) }}" class="btn btn-outline-info active" role="button" aria-pressed="true" >{{lista}}</a>
+         {% else %}
+            <a href="{{ url_for('homepage', list_type=lista ) }}" class="btn btn-outline-info" >{{lista}}</a>
+         {% endif %}
+    {% endfor %}
+</div>
 
     {% for movie in movies %}
     <div class="col-lg-3 col-md-6 mb-4">

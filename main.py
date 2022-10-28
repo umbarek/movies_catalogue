@@ -18,6 +18,7 @@ def homepage():
                             current_list=selected_list,
                             new_list=type_list)
 
+
 @app.context_processor
 def utility_processor():
     def tmdb_image_url(path, size):
@@ -29,7 +30,7 @@ def utility_processor():
 @app.route("/movie/<movie_id>")
 def movie_details(movie_id):
     details = tmdb_client.get_single_movie(movie_id)
-    cast = tmdb_client.get_single_movie_cast(movie_id)
+    cast = tmdb_client.get_single_movie_cast(movie_id, how_many=8)
     movie_images = tmdb_client.get_movie_images(movie_id)
     selected_backdrop = random.choice(movie_images['backdrops'])
     return render_template("movie_details.html", movie=details, cast=cast, selected_backdrop=selected_backdrop)

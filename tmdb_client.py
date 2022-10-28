@@ -18,26 +18,17 @@ def get_movies(how_many, list_type):
     data = get_movies_list(list_type)
     return data["results"][:how_many]
 
-def get_movies_list(list_type):
-    response = requests.get(endpoint+f"{list_type}", headers=headers)
-    response.raise_for_status()
-    return response.json()
-
 def get_single_movie(movie_id):
-    endpoint = f"https://api.themoviedb.org/3/movie/{movie_id}"
-    headers = {
-        "Authorization": f"Bearer {api_token}"
-    }
-    response = requests.get(endpoint, headers=headers)
+    response = requests.get(endpoint+f"{movie_id}", headers=headers)
     return response.json()
 
-def get_single_movie_cast(movie_id):
+def get_single_movie_cast(movie_id, how_many):
     endpoint = f"https://api.themoviedb.org/3/movie/{movie_id}/credits"
     headers = {
         "Authorization": f"Bearer {api_token}"
     }
     response = requests.get(endpoint, headers=headers)
-    return response.json()["cast"]
+    return response.json()["cast"][:how_many]
 
 def get_movie_images(movie_id):
     endpoint = f"https://api.themoviedb.org/3/movie/{movie_id}/images"
@@ -48,10 +39,6 @@ def get_movie_images(movie_id):
     return response.json()
 
 def get_movies_list(list_type):
-    endpoint = f"https://api.themoviedb.org/3/movie/{list_type}"
-    headers = {
-        "Authorization": f"Bearer {api_token}"
-    }
-    response = requests.get(endpoint, headers=headers)
+    response = requests.get(endpoint+f"{list_type}", headers=headers)
     response.raise_for_status()
     return response.json()
