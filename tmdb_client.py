@@ -46,3 +46,12 @@ def get_movie_images(movie_id):
     }
     response = requests.get(endpoint, headers=headers)
     return response.json()
+
+def get_movies_list(list_type):
+    endpoint = f"https://api.themoviedb.org/3/movie/{list_type}"
+    headers = {
+        "Authorization": f"Bearer {api_token}"
+    }
+    response = requests.get(endpoint, headers=headers)
+    response.raise_for_status()
+    return response.json()

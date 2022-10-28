@@ -35,5 +35,7 @@ def movie_details(movie_id):
     return render_template("movie_details.html", movie=details, cast=cast, selected_backdrop=selected_backdrop)
 
 
+
+
 if __name__ == "__main__":
     app.run(debug=True)
